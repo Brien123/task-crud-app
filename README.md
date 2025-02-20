@@ -97,3 +97,203 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+
+## AuthController
+
+The `AuthController` handles authentication-related operations such as user signup, login, and fetching the user profile. It uses the `AuthService` to perform these operations.
+
+### Endpoints
+
+#### POST /auth/signup
+
+Registers a new user.
+
+**Request Body:**
+
+```json
+{
+  "email": "user@example.com",
+  "password": "password123",
+  "name": "John Doe" // Optional
+}
+```
+
+**Response:**
+
+- `201 Created`: User successfully registered.
+- `400 Bad Request`: Invalid input data.
+
+#### POST /auth/login
+
+Logs in an existing user.
+
+**Request Body:**
+
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+**Response:**
+
+- `200 OK`: User successfully logged in, returns JWT token.
+- `401 Unauthorized`: Invalid email or password.
+
+#### GET /auth/profile
+
+Fetches the profile of the logged-in user. This endpoint is protected and requires a valid JWT token.
+
+**Headers:**
+
+```
+Authorization: Bearer <JWT_TOKEN>
+```
+
+**Response:**
+
+- `200 OK`: Returns the user profile.
+- `401 Unauthorized`: Invalid or missing JWT token.
+
+### Example Usage
+
+#### Signup
+
+```bash
+curl -X POST http://localhost:3000/auth/signup \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user@example.com", "password": "password123", "name": "John Doe"}'
+```
+
+#### Login
+
+```bash
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user@example.com", "password": "password123"}'
+```
+
+#### Get Profile
+
+```bash
+curl -X GET http://localhost:3000/auth/profile \
+  -H "Authorization: Bearer <JWT_TOKEN>"
+```
+
+## TaskController
+
+The `TaskController` handles task-related operations such as creating, fetching, updating, and deleting tasks. It uses the `TasksService` to perform these operations and ensures that only authenticated users can access these endpoints.
+
+### Endpoints
+
+#### POST /tasks
+
+Creates a new task for the authenticated user.
+
+**Request Body:**
+
+```json
+{
+  "title": "Task Title",
+  "description": "Task Description",
+  "status": "pending" // Optional, default is "pending"
+}
+```
+
+**Response:**
+
+- `201 Created`: Task successfully created.
+- `401 Unauthorized`: User not authenticated.
+- `400 Bad Request`: Invalid input data.
+
+#### GET /tasks
+
+Fetches all tasks for the authenticated user.
+
+**Response:**
+
+- `200 OK`: Returns a list of tasks.
+- `401 Unauthorized`: User not authenticated.
+
+#### GET /tasks/:taskId
+
+Fetches a single task by its ID for the authenticated user.
+
+**Response:**
+
+- `200 OK`: Returns the task details.
+- `401 Unauthorized`: User not authenticated.
+- `404 Not Found`: Task not found.
+
+#### PUT /tasks/:taskId
+
+Updates a task by its ID for the authenticated user.
+
+**Request Body:**
+
+```json
+{
+  "title": "Updated Task Title",
+  "description": "Updated Task Description",
+  "status": "in-progress" // Optional
+}
+```
+
+**Response:**
+
+- `200 OK`: Task successfully updated.
+- `401 Unauthorized`: User not authenticated.
+- `404 Not Found`: Task not found.
+
+#### DELETE /tasks/:taskId
+
+Deletes a task by its ID for the authenticated user.
+
+**Response:**
+
+- `200 OK`: Task successfully deleted.
+- `401 Unauthorized`: User not authenticated.
+- `404 Not Found`: Task not found.
+
+### Example Usage
+
+#### Create Task
+
+```bash
+curl -X POST http://localhost:3000/tasks \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <JWT_TOKEN>" \
+  -d '{"title": "Task Title", "description": "Task Description"}'
+```
+
+#### Get All Tasks
+
+```bash
+curl -X GET http://localhost:3000/tasks \
+  -H "Authorization: Bearer <JWT_TOKEN>"
+```
+
+#### Get Task by ID
+
+```bash
+curl -X GET http://localhost:3000/tasks/<TASK_ID> \
+  -H "Authorization: Bearer <JWT_TOKEN>"
+```
+
+#### Update Task
+
+```bash
+curl -X PUT http://localhost:3000/tasks/<TASK_ID> \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <JWT_TOKEN>" \
+  -d '{"title": "Updated Task Title", "description": "Updated Task Description", "status": "in-progress"}'
+```
+
+#### Delete Task
+
+```bash
+curl -X DELETE http://localhost:3000/tasks/<TASK_ID> \
+  -H "Authorization: Bearer <JWT_TOKEN>"
+```
