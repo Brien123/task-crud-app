@@ -27,6 +27,7 @@
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^11.0.1",
     "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
     "class-validator": "^0.14.1",

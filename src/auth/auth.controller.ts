@@ -20,6 +20,6 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Req() req: Request) {
-    return req.user; // Contains user info from JWT payload
+    return req.user;
   }
 }

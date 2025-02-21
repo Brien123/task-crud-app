@@ -162,7 +162,7 @@ Authorization: Bearer <JWT_TOKEN>
 #### Signup
 
 ```bash
-curl -X POST http://localhost:3000/auth/signup \
+curl -X POST http://localhost:5000/auth/signup \
   -H "Content-Type: application/json" \
   -d '{"email": "user@example.com", "password": "password123", "name": "John Doe"}'
 ```
@@ -170,7 +170,7 @@ curl -X POST http://localhost:3000/auth/signup \
 #### Login
 
 ```bash
-curl -X POST http://localhost:3000/auth/login \
+curl -X POST http://localhost:5000/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email": "user@example.com", "password": "password123"}'
 ```
@@ -178,7 +178,7 @@ curl -X POST http://localhost:3000/auth/login \
 #### Get Profile
 
 ```bash
-curl -X GET http://localhost:3000/auth/profile \
+curl -X GET http://localhost:5000/auth/profile \
   -H "Authorization: Bearer <JWT_TOKEN>"
 ```
 
@@ -262,7 +262,7 @@ Deletes a task by its ID for the authenticated user.
 #### Create Task
 
 ```bash
-curl -X POST http://localhost:3000/tasks \
+curl -X POST http://localhost:5000/tasks \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <JWT_TOKEN>" \
   -d '{"title": "Task Title", "description": "Task Description"}'
@@ -271,21 +271,21 @@ curl -X POST http://localhost:3000/tasks \
 #### Get All Tasks
 
 ```bash
-curl -X GET http://localhost:3000/tasks \
+curl -X GET http://localhost:5000/tasks \
   -H "Authorization: Bearer <JWT_TOKEN>"
 ```
 
 #### Get Task by ID
 
 ```bash
-curl -X GET http://localhost:3000/tasks/<TASK_ID> \
+curl -X GET http://localhost:5000/tasks/<TASK_ID> \
   -H "Authorization: Bearer <JWT_TOKEN>"
 ```
 
 #### Update Task
 
 ```bash
-curl -X PUT http://localhost:3000/tasks/<TASK_ID> \
+curl -X PUT http://localhost:5000/tasks/<TASK_ID> \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <JWT_TOKEN>" \
   -d '{"title": "Updated Task Title", "description": "Updated Task Description", "status": "in-progress"}'
@@ -294,6 +294,6 @@ curl -X PUT http://localhost:3000/tasks/<TASK_ID> \
 #### Delete Task
 
 ```bash
-curl -X DELETE http://localhost:3000/tasks/<TASK_ID> \
+curl -X DELETE http://localhost:5000/tasks/<TASK_ID> \
   -H "Authorization: Bearer <JWT_TOKEN>"
 ```

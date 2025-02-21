@@ -17,8 +17,6 @@ export class TasksService {
 
     // Create a new task
     async createTask(createTaskDto: CreateTaskDto, userId: string): Promise<Task> {
-        console.log(userId)
-        // Check if the user exists
         const user = await this.userModel.findById(userId);
         if (!user) {
         throw new Error('User not found');

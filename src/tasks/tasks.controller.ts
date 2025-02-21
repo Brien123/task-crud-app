@@ -20,7 +20,6 @@ export class TaskController {
   ): Promise<Task> {
     const user = req.user as any;
     if (user && user.userId) {
-        console.log(user.userId)
       return this.taskService.createTask(createTaskDto, user.userId);
     }
     throw new Error('User not found');
@@ -32,7 +31,6 @@ export class TaskController {
     async getAllTasks(@Req() req: Request): Promise<TaskListDto[]> {
     const user = req.user as any;
     if (user && user.userId) {
-        console.log(user.userId)
         return this.taskService.getAllTasks(user.userId);
     }
     throw new Error('User not authorized');
